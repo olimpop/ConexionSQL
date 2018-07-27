@@ -16,6 +16,7 @@ import java.sql.Statement;
 public class ConexionSQL {
 //    cadena de conexion direccion del servidor base de datos usuario y contraseña
     static String cadenaConexion = "jdbc:postgresql://localhost/Transporte?" + "user=postgres&password=postgres";
+ 
     public static void main(String[] arg) {
         Connection conexion = null;
         Statement sentencia = null;
@@ -24,14 +25,17 @@ public class ConexionSQL {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(cadenaConexion);
             sentencia = conexion.createStatement();
+//          donde se escribe el query sobre la base de datos
             String consultaSQL = "SELECT * FROM prueba1";
             resultado = sentencia.executeQuery(consultaSQL);
             while (resultado.next()) {
+//                mapeo de los campos que estan en la tabla pruebas1
                 Long id = resultado.getLong("id");
                 String nombres = resultado.getString("nombre");
                 String telefono = resultado.getString("telefono");
                 String celular = resultado.getString("celular");
                 int version = resultado.getInt("version");
+//                Impresion de los resultados que devuelve la consulta
                 System.out.println(id + "\t" + nombres + "\t" + telefono + "\t" + celular + "\t" + version);
             }
         } catch (Exception e) {
@@ -40,6 +44,7 @@ public class ConexionSQL {
         } finally {
             if (resultado != null) {
                 try {
+                    
                     resultado.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,6 +59,7 @@ public class ConexionSQL {
             }
             if (conexion != null) {
                 try {
+//                 cierre de la conexion con la base  
                     conexion.close();
                 } catch (Exception e) {
                     e.printStackTrace();
