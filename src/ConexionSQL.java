@@ -8,16 +8,14 @@
  *
  * @author Jair Parra
  */
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-  
-public class ConexionSQL {
 
-     static String cadenaConexion = "jdbc:postgresql://localhost/Transporte?" + "user=postgres&password=postgres";
- 
+public class ConexionSQL {
+//    cadena de conexion direccion del servidor base de datos usuario y contraseña
+    static String cadenaConexion = "jdbc:postgresql://localhost/Transporte?" + "user=postgres&password=postgres";
     public static void main(String[] arg) {
         Connection conexion = null;
         Statement sentencia = null;
@@ -30,11 +28,11 @@ public class ConexionSQL {
             resultado = sentencia.executeQuery(consultaSQL);
             while (resultado.next()) {
                 Long id = resultado.getLong("id");
-                String nombres = resultado.getString("nombre");                
+                String nombres = resultado.getString("nombre");
                 String telefono = resultado.getString("telefono");
                 String celular = resultado.getString("celular");
-                int version =resultado.getInt("version");
-                System.out.println(id + "\t" + nombres + "\t" + telefono+"\t"+celular +"\t"+version);
+                int version = resultado.getInt("version");
+                System.out.println(id + "\t" + nombres + "\t" + telefono + "\t" + celular + "\t" + version);
             }
         } catch (Exception e) {
             e.printStackTrace();
